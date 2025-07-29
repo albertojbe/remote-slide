@@ -1,0 +1,73 @@
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+/>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .page {
+        height: 100%;
+        width: 100%;
+        background-color: darkslategray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+    }
+
+    .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40rem;
+        height: 40rem;
+        border-radius: 20px;
+        background-color: skyblue;
+        transition: 300ms ease;
+    }
+
+    .box:active {
+        background-color: midnightblue;
+    }
+
+    .box > i {
+        font-size: 30rem;
+    }
+</style>
+
+<div class="page">
+    <div class="container">
+        <div class="box" id="right" onclick="sendCmd(this)">
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+        </div>
+        <div class="box" id="left" onclick="sendCmd(this)">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    function sendCmd(element) {
+        const key = element.id;
+        const ip = "{{ ip }}";
+        console.log(key);
+        console.log(ip);
+
+        fetch(`http://${ip}:5000/button/${key}`)
+            .then((response) => response.json())
+            .then((response) => console.log(response));
+    }
+</script>
